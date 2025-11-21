@@ -1,16 +1,169 @@
-name: Build LaTeX Document
-on: [push, pull_request]
-jobs:
-  build-latex:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: xu-cheng/latex-action@v2
-        with:
-          root_file: main.tex
-          compiler: xelatex
-      - name: Upload PDF
-        uses: actions/upload-artifact@v1
-        with:
-          name: PDF
-          path: main.pdf
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{persian}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\settextfont{XB Zar}
+\geometry{a4paper, margin=1in}
+
+\title{مطالعه جامع روش کاهش اعداد: روش مهدی صادق بهاروند}
+\author{مهدی صادق بهاروند}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+این مقاله به مطالعه روش کاهش اعداد مهدی صادق بهاروند می‌پردازد. این روش یک الگوریتم سیستماتیک برای کاهش اعداد طبیعی به صفر از طریق دنباله‌ای قطعی از تفریق‌ها است. در این پژوهش، به تحلیل دقیق کاهش اعداد 12345 و 6789، بررسی دنباله اعداد متقارن و ارائه تحلیل‌های ریاضی پرداخته شده است. نتایج نشان می‌دهد روش بهاروند برای اعداد متقارن بهینه عمل می‌کند.
+\end{abstract}
+
+\textbf{کلمات کلیدی:} کاهش اعداد، روش بهاروند، چرخه موقعیتی، اعداد متقارن، تحلیل ریاضی
+
+\section{مقدمه}
+روش مهدی صادق بهاروند یک رویکرد سیستماتیک برای کاهش اعداد به صفر است که بر اساس چرخه‌ای ثابت از موقعیت‌های ارقام عمل می‌کند. این روش نه تنها از نظر محاسباتی جالب توجه است، بلکه کاربردهای آموزشی ارزشمندی در درک مفاهیم پایه ریاضی دارد.
+
+\section{روش بهاروند}
+
+\subsection{فرمول‌بندی ریاضی}
+
+برای یک عدد $N$ با $m$ رقم:
+
+\begin{align*}
+\text{فرض کنیم } & N_0 = N \\
+& N_{i+1} = N_i - 10^{p_i} \\
+\text{که در آن } & p_i = (m - 1 - (i \mod m)) \\
+& m = \lfloor \log_{10} N \rfloor + 1
+\end{align*}
+
+\textbf{شرط توقف}: $N_n = 0$ پس از $n$ مرحله.
+
+\subsection{الگوریتم}
+
+\begin{algorithm}[H]
+\caption{الگوریتم کاهش بهاروند}
+\begin{algorithmic}[1]
+\Procedure{BaharundReduction}{$N$}
+\State $steps \gets 0$
+\State $current \gets N$
+\State $m \gets \lfloor \log_{10} N \rfloor + 1$
+\While{$current > 0$}
+\State $p \gets m - 1 - (steps \mod m)$
+\State $subtract \gets 10^p$
+\If{$subtract \leq current$}
+\State $current \gets current - subtract$
+\EndIf
+\State $steps \gets steps + 1$
+\EndWhile
+\State \Return $steps$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\section{مطالعه موردی}
+
+\subsection{عدد 12345}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+مرحله & $N_i$ & تفریق & $N_{i+1}$ \\
+\midrule
+0 & 12345 & $10^4$ & 02345 \\
+1 & 02345 & $10^3$ & 01345 \\
+2 & 01345 & $10^2$ & 01245 \\
+3 & 01245 & $10^1$ & 01235 \\
+4 & 01235 & $10^0$ & 01234 \\
+5 & 01234 & $10^3$ & 00234 \\
+6 & 00234 & $10^2$ & 00134 \\
+7 & 00134 & $10^1$ & 00124 \\
+8 & 00124 & $10^0$ & 00123 \\
+9 & 00123 & $10^2$ & 00023 \\
+10 & 00023 & $10^1$ & 00013 \\
+11 & 00013 & $10^0$ & 00012 \\
+12 & 00012 & $10^1$ & 00002 \\
+13 & 00002 & $10^0$ & 00001 \\
+14 & 00001 & $10^0$ & 00000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{تعداد مراحل: 15}
+
+\subsection{عدد 6789}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+مرحله & $N_i$ & تفریق & $N_{i+1}$ \\
+\midrule
+0 & 6789 & $10^3$ & 5789 \\
+1 & 5789 & $10^2$ & 5689 \\
+2 & 5689 & $10^1$ & 5679 \\
+3 & 5679 & $10^0$ & 5678 \\
+4 & 5678 & $10^3$ & 4678 \\
+5 & 4678 & $10^2$ & 4578 \\
+6 & 4578 & $10^1$ & 4568 \\
+7 & 4568 & $10^0$ & 4567 \\
+8 & 4567 & $10^3$ & 3567 \\
+9 & 3567 & $10^2$ & 3467 \\
+10 & 3467 & $10^1$ & 3457 \\
+11 & 3457 & $10^0$ & 3456 \\
+12 & 3456 & $10^3$ & 2456 \\
+13 & 2456 & $10^2$ & 2356 \\
+14 & 2356 & $10^1$ & 2346 \\
+15 & 2346 & $10^0$ & 2345 \\
+16 & 2345 & $10^3$ & 1345 \\
+17 & 1345 & $10^2$ & 1245 \\
+18 & 1245 & $10^1$ & 1235 \\
+19 & 1235 & $10^0$ & 1234 \\
+20 & 1234 & $10^3$ & 0234 \\
+21 & 0234 & $10^2$ & 0134 \\
+22 & 0134 & $10^1$ & 0124 \\
+23 & 0124 & $10^0$ & 0123 \\
+24 & 0123 & $10^2$ & 0023 \\
+25 & 0023 & $10^1$ & 0013 \\
+26 & 0013 & $10^0$ & 0012 \\
+27 & 0012 & $10^1$ & 0002 \\
+28 & 0002 & $10^0$ & 0001 \\
+29 & 0001 & $10^0$ & 0000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{تعداد مراحل: 30}
+
+\section{تحلیل ریاضی}
+
+\subsection{فرمول پیچیدگی}
+
+برای عدد $N$ با $m$ رقم و ارقام $d_1, d_2, \ldots, d_m$:
+\[ T(N) = \sum_{i=1}^{m} (m - i + 1) \cdot d_i \]
+
+\subsection{قضیه اعداد متقارن}
+
+\begin{theorem}
+برای عدد متقارن $S_n = \underbrace{111\ldots1}_{n}$، روش بهاروند در $n$ مرحله به صفر می‌رسد.
+\end{theorem}
+
+\begin{proof}
+از آنجایی که همه ارقام $S_n$ برابر با 1 هستند، در هر مرحله دقیقاً یک رقم پردازش می‌شود.
+\end{proof}
+
+\section{نتیجه‌گیری}
+
+روش بهاروند یک الگوریتم سیستماتیک و آموزشی است که درک عمیقی از ساختار اعداد ارائه می‌دهد. این روش برای اعداد متقارن بهینه عمل می‌کند و برای اهداف آموزشی بسیار ارزشمند است.
+
+\end{document}
