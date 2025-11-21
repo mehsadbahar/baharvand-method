@@ -16,7 +16,7 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: article.tex
+     root_file: main.tex
           compiler: xelatex
           
       - name: Upload PDF artifact
