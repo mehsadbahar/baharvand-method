@@ -1,23 +1,22 @@
-\documentclass{article}
-\usepackage{amsmath}
+Quantum MSB Priority Formulas:
 
-\begin{document}
+1. State Reduction Operator:
+R_MSB = ∏[i=1 to n] (I - 1/2^i σ_z^i)
 
-\section{Quantum Formulas}
+2. Fractal Transformation:
+|ψ'> = F ∘ R_MSB |ψ>
 
-\subsection{MSB Reduction}
-\[
-R = \prod_{i=1}^{n} ( I - 2^{-i} \sigma_z^i )
-\]
+3. Zeptosecond Evolution:
+dρ/dt = -i/ħ[H_zp, ρ] - 1/(2τ) ∑[Q_i,[Q_i,ρ]]
+τ = 1e-21 s
 
-\subsection{Time Evolution}
-\[
-\frac{d\rho}{dt} = -i[H, \rho] - \frac{1}{\tau} \sum [Q_i,[Q_i,\rho]]
-\]
+4. Energy-Information Density:
+D_EI = (1/ΔV)(βE + γI)
+I = -∑ p_j ln p_j
 
-\subsection{Information Density}
-\[
-D = \frac{E + I}{V}, \quad I = -\sum p_j \ln p_j
-\]
+5. Transformation Map:
+|ψ_f> = T_subspace ∘ F_loop ∘ R_MSB |ψ_i>
 
-\end{document}
+6. Termination Condition:
+<ψ| P_term |ψ> ≥ 1-ε
+P_term = ⊗ |0><0|_i
