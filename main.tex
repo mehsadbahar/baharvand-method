@@ -1,30 +1,23 @@
-\documentclass[12pt]{article}
+\documentclass{article}
 \usepackage{amsmath}
-\usepackage{amssymb}
 
 \begin{document}
 
-\section*{Quantum MSB Priority Formulas}
+\section{Quantum Formulas}
 
-\subsection*{State Reduction Operator}
+\subsection{MSB Reduction}
 \[
-R_{MSB} = \prod_{i=1}^{n} \left( I - \frac{1}{2^i}\sigma_z^{(i)} \right)
-\]
-
-\subsection*{Time Evolution}
-\[
-\frac{d\rho}{dt} = -\frac{i}{\hbar}[H_{zp}, \rho] - \frac{1}{2\tau_z}\sum_{i=1}^{n}[Q_i,[Q_i,\rho]]
-\]
-\[
-\tau_z = 10^{-21} \text{ s}
+R = \prod_{i=1}^{n} ( I - 2^{-i} \sigma_z^i )
 \]
 
-\subsection*{Energy-Information Density}
+\subsection{Time Evolution}
 \[
-D_{EI} = \frac{1}{\Delta V}\left( \beta E + \gamma I \right)
+\frac{d\rho}{dt} = -i[H, \rho] - \frac{1}{\tau} \sum [Q_i,[Q_i,\rho]]
 \]
+
+\subsection{Information Density}
 \[
-I = -\sum_{j} p_j \ln p_j
+D = \frac{E + I}{V}, \quad I = -\sum p_j \ln p_j
 \]
 
 \end{document}
