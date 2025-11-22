@@ -1,69 +1,30 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{physics}
-\usepackage{braket}
-\usepackage{underbrace}
 
 \begin{document}
 
-\section*{فرمول تکمیلی کوانتومی برای سیستم MSB Priority}
+\section*{Quantum MSB Priority Formulas}
 
-\subsection*{۱. عملگر کاهش حالت کوانتومی:}
-\begin{equation}
-\hat{R}_{\text{MSB}} = \prod_{i=1}^{n} \left( \hat{I} - \frac{1}{2^i}\hat{\sigma}_z^{(i)} \right)
-\end{equation}
-که در آن:
-\begin{itemize}
-    \item $\hat{\sigma}_z^{(i)}$: عملگر پائولی برای بیت $i$
-    \item $i=1$: بیت با اهمیت بیشتر (MSB)
-\end{itemize}
+\subsection*{State Reduction Operator}
+\[
+R_{MSB} = \prod_{i=1}^{n} \left( I - \frac{1}{2^i}\sigma_z^{(i)} \right)
+\]
 
-\subsection*{۲. تغییر حالت با نگاشت فرکتالی:}
-\begin{equation}
-\ket{\psi'} = \mathcal{F}_{\alpha} \circ \hat{R}_{\text{MSB}} \ket{\psi}
-\end{equation}
-\begin{equation}
-\mathcal{F}_{\alpha} = \lim_{n \to \infty} \bigcup_{k=1}^{n} T_k(S)
-\end{equation}
-جایی که $T_k$ تبدیل‌های خودمتشابه هستند.
+\subsection*{Time Evolution}
+\[
+\frac{d\rho}{dt} = -\frac{i}{\hbar}[H_{zp}, \rho] - \frac{1}{2\tau_z}\sum_{i=1}^{n}[Q_i,[Q_i,\rho]]
+\]
+\[
+\tau_z = 10^{-21} \text{ s}
+\]
 
-\subsection*{۳. معادله تکامل زمانی زپتوثانیه‌ای:}
-\begin{equation}
-\frac{d\hat{\rho}}{dt} = -\frac{i}{\hbar}[\hat{H}_{\text{zp}}, \hat{\rho}] - \frac{1}{2\tau_z}\sum_{i=1}^{n}[\hat{Q}_i,[\hat{Q}_i,\hat{\rho}]]
-\end{equation}
-\begin{equation}
-\tau_z = 10^{-21} \text{ s} \quad \text{(زپتوثانیه)}
-\end{equation}
-
-\subsection*{۴. چگالی اطلاعات-انرژی:}
-\begin{equation}
-\mathcal{D}_{\text{EI}} = \frac{1}{\Delta V}\left( \beta E + \gamma I \right)
-\end{equation}
-\begin{equation}
-I = -\sum_{j} p_j \ln p_j \quad \text{(انترپی اطلاعات)}
-\end{equation}
-
-\subsection*{۵. تبدیل حالت کلی:}
-\begin{equation}
-\ket{\psi_f} = \underbrace{\hat{T}_{\text{subspace}} \circ \hat{F}_{\text{loop}} \circ \hat{R}_{\text{MSB}}}_{\text{Map}} \ket{\psi_i}
-\end{equation}
-
-\subsection*{۶. شرط ترمینیشن کوانتومی:}
-\begin{equation}
-\bra{\psi} \hat{P}_{\text{term}} \ket{\psi} \geq 1 - \epsilon
-\end{equation}
-\begin{equation}
-\hat{P}_{\text{term}} = \bigotimes_{i=1}^{n} \ket{0}\bra{0}_i
-\end{equation}
-
-\subsection*{نمادگذاری:}
-\begin{itemize}
-    \item $\hat{R}_{\text{MSB}}$: عملگر کاهش با اولویت MSB
-    \item $\mathcal{F}_{\alpha}$: عملگر فرکتالی
-    \item $\hat{H}_{\text{zp}}$: هامیلتونی پالس زپتوثانیه
-    \item $\hat{T}_{\text{subspace}}$: تبدیل زیرفضا
-    \item $\hat{F}_{\text{loop}}$: بازخورد حلقه‌ای
-\end{itemize}
+\subsection*{Energy-Information Density}
+\[
+D_{EI} = \frac{1}{\Delta V}\left( \beta E + \gamma I \right)
+\]
+\[
+I = -\sum_{j} p_j \ln p_j
+\]
 
 \end{document}
